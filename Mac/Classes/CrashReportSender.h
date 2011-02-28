@@ -80,7 +80,7 @@ typedef enum CrashReportStatus {
 #endif
 {
 	CrashReportStatus	_serverResult;
-	int					_statusCode;
+	NSInteger			_statusCode;
 	NSMutableString		*_contentOfProperty;
 
 	id					_delegate;
