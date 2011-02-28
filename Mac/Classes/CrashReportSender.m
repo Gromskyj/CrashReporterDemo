@@ -114,6 +114,7 @@
 	NSArray* filteredFiles = [sortedFiles filteredArrayUsingPredicate:filterPredicate];
 	
 	_crashFile = [[filteredFiles valueForKeyPath:@"path"] lastObject];	
+    [dateSortDescriptor release];
 }
 
 
