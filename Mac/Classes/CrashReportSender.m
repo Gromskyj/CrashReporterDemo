@@ -498,7 +498,7 @@
 	NSMutableArray* applicationStrings = [NSMutableArray array];
 	
 	NSString* searchString = [[_delegate applicationName] stringByAppendingString:@"["];
-	while (currentObject = [theEnum nextObject])
+	while ((currentObject = [theEnum nextObject]))
 	{
 		if ([currentObject rangeOfString:searchString].location != NSNotFound)
 			[applicationStrings addObject: currentObject];
