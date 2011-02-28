@@ -445,17 +445,15 @@
 	
 	[[self window] makeFirstResponder: nil];
 	
-	OSErr err;
-	
 	NSString *userid = @"";
 	NSString *contact = @"";
 	
 	NSString *notes = [NSString stringWithFormat:@"Comments:\n%@\n\nConsole:\n%@", [descriptionTextField stringValue], _consoleContent];	
 	
 	SInt32 versionMajor, versionMinor, versionBugFix;
-	if ((err = Gestalt(gestaltSystemVersionMajor, &versionMajor)) != noErr) versionMajor = 0;
-	if ((err = Gestalt(gestaltSystemVersionMinor, &versionMinor)) != noErr)  versionMinor= 0;
-	if ((err = Gestalt(gestaltSystemVersionBugFix, &versionBugFix)) != noErr) versionBugFix = 0;
+	if (Gestalt(gestaltSystemVersionMajor, &versionMajor) != noErr) versionMajor = 0;
+	if (Gestalt(gestaltSystemVersionMinor, &versionMinor) != noErr)  versionMinor= 0;
+	if (Gestalt(gestaltSystemVersionBugFix, &versionBugFix) != noErr) versionBugFix = 0;
 	
 	_xml = [[NSString stringWithFormat:@"<crash><applicationname>%s</applicationname><bundleidentifier>%s</bundleidentifier><systemversion>%@</systemversion><senderversion>%@</senderversion><version>%@</version><platform>%@</platform><userid>%@</userid><contact>%@</contact><description><![CDATA[%@]]></description><log><![CDATA[%@]]></log></crash>",
 			[[_delegate applicationName] UTF8String],
