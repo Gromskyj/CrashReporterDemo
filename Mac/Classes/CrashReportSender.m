@@ -211,7 +211,8 @@
     [self returnToMainApplication];
 	
 	NSTimer *_submitTimer;
-	_submitTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(postXML:) userInfo:xml repeats:NO];	 
+	_submitTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(postXML:) userInfo:xml repeats:NO];
+#pragma unused(_submitTimer)
 }
 
 - (void) postXML:(NSTimer *) timer
