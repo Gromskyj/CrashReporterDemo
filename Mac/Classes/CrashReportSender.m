@@ -85,9 +85,7 @@
 	_companyName = nil;
 	_delegate = nil;
 	_submissionURL = nil;
-	[_crashReportSenderUI release];
 	
-	[super dealloc];
 }
 
 
@@ -114,7 +112,6 @@
 	NSArray* filteredFiles = [sortedFiles filteredArrayUsingPredicate:filterPredicate];
 	
 	_crashFile = [[filteredFiles valueForKeyPath:@"path"] lastObject];	
-    [dateSortDescriptor release];
 }
 
 
@@ -256,7 +253,6 @@
 			
 			[parser parse];
 			
-			[parser release];
 		}
 		
 // TODO: The following line causes the app to crash, why !?
@@ -351,7 +347,7 @@
 
 - (id)init:(id)delegate crashFile:(NSString *)crashFile companyName:(NSString *)companyName applicationName:(NSString *)applicationName
 {
-	[super init];
+	self = [super init];
 	self = [[CrashReportSenderUI alloc] initWithWindowNibName: @"CrashReporterMain"];
 
 	if ( self != nil)
@@ -455,7 +451,7 @@
 	if (Gestalt(gestaltSystemVersionMinor, &versionMinor) != noErr)  versionMinor= 0;
 	if (Gestalt(gestaltSystemVersionBugFix, &versionBugFix) != noErr) versionBugFix = 0;
 	
-	_xml = [[NSString stringWithFormat:@"<crash><applicationname>%s</applicationname><bundleidentifier>%s</bundleidentifier><systemversion>%@</systemversion><senderversion>%@</senderversion><version>%@</version><platform>%@</platform><userid>%@</userid><contact>%@</contact><description><![CDATA[%@]]></description><log><![CDATA[%@]]></log></crash>",
+	_xml = [NSString stringWithFormat:@"<crash><applicationname>%s</applicationname><bundleidentifier>%s</bundleidentifier><systemversion>%@</systemversion><senderversion>%@</senderversion><version>%@</version><platform>%@</platform><userid>%@</userid><contact>%@</contact><description><![CDATA[%@]]></description><log><![CDATA[%@]]></log></crash>",
 			[[_delegate applicationName] UTF8String],
 			[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] UTF8String],
 			[NSString stringWithFormat:@"%i.%i.%i", versionMajor, versionMinor, versionBugFix],
@@ -466,7 +462,7 @@
 			contact,
 			notes,
 			_crashLogContent
-			] retain];
+			];
 	
 	[self endCrashReporter];
 
@@ -530,8 +526,6 @@
 {
 	_companyName = nil;
 	_delegate = nil;
-	
-	[super dealloc];
 }
 
 
