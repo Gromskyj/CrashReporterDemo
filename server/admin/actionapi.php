@@ -3,7 +3,7 @@
 	/*
 	* Author: Andreas Linde <mail@andreaslinde.de>
 	*
-	* Copyright (c) 2009 Andreas Linde. All rights reserved.
+	* Copyright (c) 2009-2011 Andreas Linde.
 	* All rights reserved.
 	*
 	* Permission is hereby granted, free of charge, to any person
@@ -27,10 +27,6 @@
 	* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 	* OTHER DEALINGS IN THE SOFTWARE.
 	*/
-	 
-//
-// Delete a crash
-//
 
 require_once('../config.php');
 require_once('common.inc');
@@ -122,7 +118,7 @@ if ($action == "deletecrashid" && $id != "") {
       }
   }
       
-  $query = "UPDATE ".$dbgrouptable." SET description = '".$description."' WHERE id = ".$id;
+  $query = "UPDATE ".$dbgrouptable." SET description = '".mysql_real_escape_string($description)."' WHERE id = ".$id;
   $result = mysql_query($query) or die('Error in SQL '.$query);
 } else if ($action == "symbolicatecrashid" && $id != "") {
     $query = "SELECT id FROM ".$dbsymbolicatetable." WHERE crashid = ".$id;
